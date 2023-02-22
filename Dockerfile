@@ -1,3 +1,5 @@
+### ----- Part1: Build docker image for Cuda support GPU (Nvidia Tesla K80) ----- ###
+### ----- Command: docker build -t <imagename>:<tagname> .
 # ARG CUDA_VERSION=10.1
 # ARG CUDNN_VERSION=7
 # ARG UBUNTU_VERSION=18.04
@@ -131,7 +133,10 @@
 # ENV NVIDIA_DRIVER_CAPABILITIES all
 # ENV XDG_RUNTIME_DIR "/tmp"
 
-FROM pmfgpu:manual1
+### ----- Part1: End of Part1, we will already have docker image <imagename>:<tagname> ex.pmfgpu:manual1 ----- ###
+
+### ----- Part2: Integrate myapp (Web Service for this) ----- ###
+FROM pmfgpu:manual1 
 
 COPY /myapp/requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
@@ -139,10 +144,7 @@ RUN pip3 install -r requirements.txt
 WORKDIR /myapp
 COPY /myapp .
 
-# ENTRYPOINT [ "python3" ]
-# CMD [ "myapp/app.py" ]
-# ENV FLASK_APP=/myapp/app.py
+### ----- App starter command can be set on both of docker and Azure Container Instance ----- 
 # CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+### or
 # CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
-# CMD ["/bin/bash"]
-# CMD [ "python3"]

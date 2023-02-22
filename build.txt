@@ -1,2 +1,1 @@
-docker build -t pmfgpu:first .
-docker run --publish 5000:5000 pmfgpu
+docker build -t pmfgpu:manual1 .
