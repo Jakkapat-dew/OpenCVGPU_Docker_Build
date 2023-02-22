@@ -1,1 +1,2 @@
+# please type on windows command line or Linux, mac terminal
 docker build -t pmfgpu:manual1 .
